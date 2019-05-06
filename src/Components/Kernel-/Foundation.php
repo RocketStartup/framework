@@ -8,7 +8,7 @@ class Foundation{
         public function __construct()
         {   
             ob_start();
-            define('PATH_ROOT', explode('vendor/RocketStartup', __DIR__)[0]);
+            define('PATH_ROOT', explode('vendor/rocket-startup', __DIR__)[0]);
 
             $this->defineAlias();
             
