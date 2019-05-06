@@ -1,0 +1,25 @@
+{
+    "name": "rocket-startup/framework",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "support": {
+        "issues": "https://github.com/rocket-startup/framework/issues",
+        "source": "https://github.com/rocket-startup/framework/"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "require": {
+        "php": ">=7"
+    },
+    "autoload": {
+        "psr-4": {
+            "RocketStartup\\": [
+                "src/",
+                "tests/"
+            ]
+        }
+    }
+}
