@@ -32,6 +32,15 @@ class Facade
         throw new \Exception('Facade Instance <b>'.$object['class'].'</b> not found.');
     }
 
+    public static function unsetInstance($object='')
+    {   
+        if (isset(self::$instance[$object])) {
+            unset(self::$instance[$object]);
+            return true;
+        }
+        throw new \Exception('Facade unsetInstance <b>'.$object.'</b> not found.');
+    }
+
     private static function returnInstance($stringKey=null){
 
             if (isset(self::$instance[$stringKey])) {

@@ -35,11 +35,9 @@ class GeneratorApps{
 				}
 			}
 		}
-		if(is_null($this->currentApplication)){
-			throw new \Exception('Application not found, see addressUri on Leanstart.php');
-		}else{
-			return $this->currentApplication;
-		}
+		
+		return $this->currentApplication;
+		
 	}
 
 

@@ -23,8 +23,7 @@ class Application
     }
 
 
-    public function generatorApp()
-    {
+    public function generatorApps(){
         $generatorApps = \Http::getInstance(
             [
                 'GeneratorApps',
@@ -32,12 +31,39 @@ class Application
             ],
             \kernel::getInstance('Kernel')->getConfigurations('Applications')
         );
+        return $generatorApps;
+    }
+    public function generatorApp()
+    {
+        $generatorApps=$this->generatorApps();
+
+        if( 
+            is_null($generatorApps->getCurrentApplication()) &&
+            isset(\kernel::getInstance('Kernel')->getConfigurations('Applications')['main']['development']['addressUri']) &&
+            empty(\kernel::getInstance('Kernel')->getConfigurations('Applications')['main']['development']['addressUri'])
+        )
+        { 
+            // if dont found link, write on json the actual address
+            $writeonJson = new \RocketStartup\Components\Config\UpdateConfigFile();
+            $writeonJson->setConfigUriDev();
+
+            // claen GeneratorApps and File of config
+            \Http::unsetInstance('GeneratorApps');
+            \Config::unsetInstance('ConfigFile');
+
+            // reset config json and register \kernel::getInstance('Kernel')
+            \kernel::getInstance('Kernel')->getConfigurations('Applications');
+
+            $generatorApps=$this->generatorApps();
+
+        }
 
         if(is_null($generatorApps->getCurrentApplication()))
         { 
-            throw new \Exception('Application not found.');
+            throw new \Exception('Application:'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].' not found in rocketstartup.json');
         }
 
+        
         
 
         $this->nameApplication  = $generatorApps->getCurrentApplication()->nameApplication;
@@ -69,6 +95,8 @@ class Application
             ],
             $generatorApps->getCurrentApplication()
         );
+
+        
 
         $this->addressUri = $app->addressUri; 
 

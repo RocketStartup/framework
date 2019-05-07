@@ -4,7 +4,7 @@ namespace RocketStartup\Components\Routing;
 
 class Controllers{
 
-    private $controllerPath     =  PATH_ROOT.'Apps/';
+    private $controllerPath     =  PATH_ROOT.'apps/';
     private $controllerFile;
     private $uriApp;
     private $uriMapping;
