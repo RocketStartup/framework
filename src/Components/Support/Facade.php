@@ -1,6 +1,6 @@
 <?php
 
-namespace RocketStartup\Components\Support;
+namespace Astronphp\Components\Support;
 use Exception;
 
 class Facade

@@ -1,6 +1,6 @@
 <?php
 
-namespace RocketStartup\Components\Performance;
+namespace Astronphp\Components\Performance;
 
 class Timer{
 	public $log			=	Array();

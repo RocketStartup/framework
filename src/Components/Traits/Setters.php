@@ -1,6 +1,6 @@
 <?php
 
-namespace RocketStartup\Components\Traits;
+namespace Astronphp\Components\Traits;
 
 trait Setters {
     

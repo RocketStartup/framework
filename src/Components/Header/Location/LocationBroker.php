@@ -1,6 +1,6 @@
 <?php
 
-namespace RocketStartup\Components\Header\Location;
+namespace Astronphp\Components\Header\Location;
 
 class LocationBroker{
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace RocketStartup\Components\Http;
+namespace Astronphp\Components\Http;
 
 class Response{
 	

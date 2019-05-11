@@ -1,7 +1,7 @@
 <?php
 
-namespace RocketStartup\Components\Applications;
-use RocketStartup\Components\Routing\Controllers;
+namespace Astronphp\Components\Applications;
+use Astronphp\Components\Routing\Controllers;
 
 class instanceApplication{
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace RocketStartup\Components\DataBase;
+namespace Astronphp\Components\DataBase;
 		
 class Orm{
 	public $engine;
@@ -21,15 +21,15 @@ class Orm{
 	}
 
 	public function mysql(){
-		if(class_exists(\RocketStartup\Orm\MakerSql::class)){
+		if(class_exists(\Astronphp\Orm\MakerSql::class)){
 			return \Orm::getInstance(
 					[
 						'mysql',
-						\RocketStartup\Orm\MakerSql::class
+						\Astronphp\Orm\MakerSql::class
 					]
 				);
 		}else{
-			throw new \Exception("Use composer require RocketStartup/orm");
+			throw new \Exception("Use composer require astronphp/orm");
 		}
 	}
 

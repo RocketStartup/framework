@@ -1,11 +1,11 @@
 <?php
 
-namespace RocketStartup\Components\Config;
+namespace Astronphp\Components\Config;
 
 class UpdateConfigFile{
 
 	public $configurations 		= 	array();
-	private $directoryConfig 	= 	'rocketstartup.json';
+	private $directoryConfig 	= 	'astronphp.json';
 
 	function __construct(){
 
@@ -23,7 +23,7 @@ class UpdateConfigFile{
 		//Encode the array back into a JSON string.
 		$json = json_encode($contentsDecoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 		//Save the file.
-		file_put_contents(PATH_ROOT.'rocketstartup.json', $json);
+		file_put_contents(PATH_ROOT.'astronphp.json', $json);
 	}
 	public function setConfigUriDev(){
 		$contentsDecoded = $this->openFile();

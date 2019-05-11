@@ -1,6 +1,6 @@
 <?php
 
-namespace RocketStartup\Components\Kernel;
+namespace Astronphp\Components\Kernel;
 
 
 class Kernel{
@@ -50,7 +50,7 @@ class Kernel{
      {    
           $Config = \Config::getInstance([
                'ConfigFile',
-               \RocketStartup\Components\Config\ConfigFile::class
+               \Astronphp\Components\Config\ConfigFile::class
           ]);
 
           $this->configurations = $Config->configurations;
@@ -69,14 +69,14 @@ class Kernel{
                \Errors::getInstance( 
                     [
                          'ErrorsDefine',
-                         \RocketStartup\Components\ErrorReporting\ErrorsDefine::class,
+                         \Astronphp\Components\ErrorReporting\ErrorsDefine::class,
                     ],
                     $this->configurations['ErrorsDefine']
                );
 
                \Errors::getInstance(
                     [   'ErrorView',
-                        \RocketStartup\Components\ErrorReporting\ErrorView::class
+                        \Astronphp\Components\ErrorReporting\ErrorView::class
                     ]
                 );
           }
@@ -89,7 +89,7 @@ class Kernel{
                \Sessions::getInstance(
                     [
                          'SessionServer',
-                         \RocketStartup\Components\Session\SessionServer::class,
+                         \Astronphp\Components\Session\SessionServer::class,
                     ],
                     $this->configurations['Sessions']
                );
@@ -103,7 +103,7 @@ class Kernel{
                \Http::getInstance(
                     [
                          'SessionServer',
-                         \RocketStartup\Components\Http\RequestLimiter::class,
+                         \Astronphp\Components\Http\RequestLimiter::class,
                     ],
                     $this->configurations['Request']
                );

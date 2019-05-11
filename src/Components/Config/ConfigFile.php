@@ -1,11 +1,11 @@
 <?php
 
-namespace RocketStartup\Components\Config;
+namespace Astronphp\Components\Config;
 
 class ConfigFile{
 
 	public $configurations 		= 	array();
-	private $directoryConfig 	= 	'/rocketstartup.json';
+	private $directoryConfig 	= 	'/astronphp.json';
 
 	function __construct(){
 		$this->setConfigByJson();
@@ -20,10 +20,10 @@ class ConfigFile{
 				$this->configurations = file_get_contents(PATH_ROOT.$this->directoryConfig);
 				$this->configurations = json_decode($this->configurations,true);
 			}catch(\Exception $e) {
-			    throw new \Exception("RocketStartup.json file corrupted or with syntax error");
+			    throw new \Exception("astronphp.json file corrupted or with syntax error");
 			}
 		}else{
-			throw new \Exception("RocketStartup.json file not found in project root");
+			throw new \Exception("astronphp.json file not found in project root");
 		}
 		return $this;
 	}

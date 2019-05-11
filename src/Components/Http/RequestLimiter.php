@@ -1,11 +1,11 @@
 <?php
 
-namespace RocketStartup\Components\Http;
+namespace Astronphp\Components\Http;
 
 use Exeption;
-use RocketStartup\Components\Traits\Getters;
-use RocketStartup\Components\Traits\Setters;
-use RocketStartup\Components\Http\Response;
+use Astronphp\Components\Traits\Getters;
+use Astronphp\Components\Traits\Setters;
+use Astronphp\Components\Http\Response;
 
 
 class RequestLimiter{

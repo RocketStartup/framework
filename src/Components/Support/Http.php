@@ -1,8 +1,8 @@
 <?php
 
-namespace RocketStartup\Components\Support;
+namespace Astronphp\Components\Support;
 
-use RocketStartup\Components\Support\Facade;
+use Astronphp\Components\Support\Facade;
 
 class Http extends Facade
 {

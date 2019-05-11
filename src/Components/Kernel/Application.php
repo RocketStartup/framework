@@ -1,6 +1,6 @@
 <?php
 
-namespace RocketStartup\Components\Kernel;
+namespace Astronphp\Components\Kernel;
 
 use Exception;
 
@@ -27,7 +27,7 @@ class Application
         $generatorApps = \Http::getInstance(
             [
                 'GeneratorApps',
-                \RocketStartup\Components\Applications\ManagerApp\GeneratorApps::class
+                \Astronphp\Components\Applications\ManagerApp\GeneratorApps::class
             ],
             \kernel::getInstance('Kernel')->getConfigurations('Applications')
         );
@@ -44,7 +44,7 @@ class Application
         )
         { 
             // if dont found link, write on json the actual address
-            $writeonJson = new \RocketStartup\Components\Config\UpdateConfigFile();
+            $writeonJson = new \Astronphp\Components\Config\UpdateConfigFile();
             $writeonJson->setConfigUriDev();
 
             // claen GeneratorApps and File of config
@@ -60,7 +60,7 @@ class Application
 
         if(is_null($generatorApps->getCurrentApplication()))
         { 
-            throw new \Exception('Application:'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].' not found in rocketstartup.json');
+            throw new \Exception('Application:'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].' not found in Astronphp.json');
         }
 
         
@@ -74,7 +74,7 @@ class Application
         \Http::getInstance(
             [
                 'LocationBroker',
-                \RocketStartup\Components\Header\Location\LocationBroker::class
+                \Astronphp\Components\Header\Location\LocationBroker::class
             ]
         )->AuthorizeLocation(
             $generatorApps->getCurrentApplication()->environmentApp
@@ -83,7 +83,7 @@ class Application
         $orm = \Orm::getInstance(
             [
                 'Orm',
-                \RocketStartup\Components\DataBase\Orm::class
+                \Astronphp\Components\DataBase\Orm::class
             ],
             $generatorApps->getCurrentApplication()->environmentApp
         );
@@ -91,7 +91,7 @@ class Application
         $app = \App::getInstance(
             [
                 'instanceApplication',
-                \RocketStartup\Components\Applications\instanceApplication::class
+                \Astronphp\Components\Applications\instanceApplication::class
             ],
             $generatorApps->getCurrentApplication()
         );

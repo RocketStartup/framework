@@ -1,6 +1,6 @@
 <?php
 
-namespace RocketStartup\Components\Routing;
+namespace Astronphp\Components\Routing;
 
 class Controllers{
 

@@ -1,7 +1,7 @@
 <?php
 
-namespace RocketStartup\Components\Applications\ManagerApp;
-use RocketStartup\Components\Applications\ManagerApp\Applications;
+namespace Astronphp\Components\Applications\ManagerApp;
+use Astronphp\Components\Applications\ManagerApp\Applications;
 
 class GeneratorApps{
 	public $apps;
@@ -12,7 +12,7 @@ class GeneratorApps{
 			$this->apps[] = new Applications($nameApp, $environment);
 		}
 		if(is_null($this->apps)){
-			throw new \Exception('You need to set up an app on RocketStartup.json.');
+			throw new \Exception('You need to set up an app on astronphp.json.');
 		}else{
 			return $this;
 		}

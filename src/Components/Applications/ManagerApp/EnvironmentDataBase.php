@@ -1,6 +1,6 @@
 <?php
 
-namespace RocketStartup\Components\Applications\ManagerApp;
+namespace Astronphp\Components\Applications\ManagerApp;
 
 class EnvironmentDataBase{
 

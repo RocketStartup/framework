@@ -1,6 +1,6 @@
 <?php
 
-namespace RocketStartup\Components\ErrorReporting;
+namespace Astronphp\Components\ErrorReporting;
 
 class ErrorView{
 

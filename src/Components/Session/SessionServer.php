@@ -1,6 +1,6 @@
 <?php
 
-namespace RocketStartup\Components\Session;
+namespace Astronphp\Components\Session;
 
 class SessionServer{
 

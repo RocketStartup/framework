@@ -1,17 +1,17 @@
 <?php
 
-namespace RocketStartup\Components\ErrorReporting;
+namespace Astronphp\Components\ErrorReporting;
 
 use Exeption;
-use RocketStartup\Components\ErrorReporting\ErrorReportingParser;
+use Astronphp\Components\ErrorReporting\ErrorReportingParser;
 
 class ErrorsDefine{
 
 	
 	private $displayErrors			=	true;
 	private $logErrors				=	false;
-	private $errorLogFile			=	"/Storage/Log/Error/php.log";
-	private $errorSqlFile			=	"/Storage/Log/Error/sql.log";
+	private $errorLogFile			=	"/storage/log/error/php.log";
+	private $errorSqlFile			=	"/storage/log/error/sql.log";
 	private $errorReporting			=	0;
 
 	private $notifySlackKey 		=	"";

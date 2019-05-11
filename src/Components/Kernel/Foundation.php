@@ -1,6 +1,6 @@
 <?php
 
-namespace RocketStartup\Components\Kernel;
+namespace Astronphp\Components\Kernel;
 
 
 class Foundation{
@@ -8,7 +8,7 @@ class Foundation{
         public function __construct()
         {   
             ob_start();
-            define('PATH_ROOT', explode('vendor/rocket-startup', __DIR__)[0]);
+            define('PATH_ROOT', explode('vendor/astronphp', __DIR__)[0]);
 
             $this->defineAlias();
             
@@ -20,19 +20,19 @@ class Foundation{
                 //Instance base system with low level settings
                 \Kernel::getInstance([
                     'Kernel',
-                    \RocketStartup\Components\Kernel\Kernel::class
+                    \Astronphp\Components\Kernel\Kernel::class
                 ]);                
 
                 //Instance APP with configurations and controller
                 \App::getInstance([
                     'App',
-                    \RocketStartup\Components\Kernel\Application::class
+                    \Astronphp\Components\Kernel\Application::class
                 ])->generatorApp();
 
             } catch (\Exception $e) {
                 \Errors::getInstance(
                     [   'ErrorView',
-                        \RocketStartup\Components\ErrorReporting\ErrorView::class
+                        \Astronphp\Components\ErrorReporting\ErrorView::class
                     ]
                 )->setType('Framework')->setTitle('Foundation')->setExeption($e);
             }
@@ -42,14 +42,14 @@ class Foundation{
         public function defineAlias()
         {
             foreach ([
-                'App'           =>   [\RocketStartup\Components\Support\App::class],
-                'Config'        =>   [\RocketStartup\Components\Support\Config::class],
-                'Kernel'        =>   [\RocketStartup\Components\Support\Kernel::class],
-                'Errors'        =>   [\RocketStartup\Components\Support\Errors::class],
-                'Sessions'      =>   [\RocketStartup\Components\Support\Sessions::class],
-                'Http'          =>   [\RocketStartup\Components\Support\Http::class],
-                'Orm'           =>   [\RocketStartup\Components\Support\Orm::class],
-                'Performace'    =>   [\RocketStartup\Components\Support\Performace::class],
+                'App'           =>   [\Astronphp\Components\Support\App::class],
+                'Config'        =>   [\Astronphp\Components\Support\Config::class],
+                'Kernel'        =>   [\Astronphp\Components\Support\Kernel::class],
+                'Errors'        =>   [\Astronphp\Components\Support\Errors::class],
+                'Sessions'      =>   [\Astronphp\Components\Support\Sessions::class],
+                'Http'          =>   [\Astronphp\Components\Support\Http::class],
+                'Orm'           =>   [\Astronphp\Components\Support\Orm::class],
+                'Performace'    =>   [\Astronphp\Components\Support\Performace::class],
             ] as $key => $aliases) {
                 foreach ($aliases as $alias) {
                     class_alias($alias,$key);

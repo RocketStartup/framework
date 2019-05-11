@@ -1,12 +1,11 @@
 {
-    "name": "rocket-startup/framework",
+    "name": "astronphp/framework",
     "type": "library",
     "license": "MIT",
     "minimum-stability": "dev",
-    "prefer-stable": true,
     "support": {
-        "issues": "https://github.com/rocket-startup/framework/issues",
-        "source": "https://github.com/rocket-startup/framework/"
+        "issues": "https://github.com/astronphp/framework/issues",
+        "source": "https://github.com/astronphp/framework/"
     },
     "config": {
         "sort-packages": true
@@ -16,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "RocketStartup\\": [
+            "Astronphp\\": [
                 "src/",
                 "tests/"
             ]

@@ -1,7 +1,7 @@
 <?php
 
-namespace RocketStartup\Components\Applications\ManagerApp;
-use RocketStartup\Components\Applications\ManagerApp\EnvironmentDataBase; 
+namespace Astronphp\Components\Applications\ManagerApp;
+use Astronphp\Components\Applications\ManagerApp\EnvironmentDataBase; 
 
 class EnvironmentApp{
 
