@@ -35,7 +35,9 @@ class Application
     }
     public function generatorApp()
     {
+
         $generatorApps=$this->generatorApps();
+
 
         if( 
             is_null($generatorApps->getCurrentApplication()) &&
@@ -87,6 +89,7 @@ class Application
             ],
             $generatorApps->getCurrentApplication()->environmentApp
         );
+
         
         $app = \App::getInstance(
             [
@@ -96,9 +99,8 @@ class Application
             $generatorApps->getCurrentApplication()
         );
 
-        
-
         $this->addressUri = $app->addressUri; 
+        $app->instanceController(); 
 
     }
 

@@ -15,7 +15,6 @@ class instanceApplication{
 
 	public function __construct($conf){
 		$this->defineInstanceConfig($conf->nameApplication, $conf->environmentApp);
-		$this->instanceController();
 	}
 	
 	public function defineInstanceConfig(string $name, array $conf){
@@ -31,7 +30,7 @@ class instanceApplication{
 	}
 	
 
-	private function instanceController(){
+	public function instanceController(){
 		new Controllers($this->addressUri, $this->nameApplication);
 	}
 }
