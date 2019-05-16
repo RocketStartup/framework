@@ -11,6 +11,7 @@ class Application
     public $nameApplication = null;
     public $environment     = null;
     public $addressUri      = null;
+    public $addressFullUri  = null;
     /**
      * Create a new Illuminate application instance.
      *
@@ -99,11 +100,16 @@ class Application
             $generatorApps->getCurrentApplication()
         );
 
-        $this->addressUri = $app->addressUri; 
+        $this->addressUri = $app->addressUri;
+        $this->addressFullUri = ($app->forceHttps==true?'https://':'http://').($app->forceWww==true?'www.':'').$app->addressUri;
+
         $app->instanceController(); 
 
     }
 
+    public function addressFullUri(){
+        return $this->addressFullUri;
+    }
     public function addressUri(){
         return $this->addressUri;
     }
