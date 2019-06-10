@@ -39,7 +39,6 @@ class Application
 
         $generatorApps=$this->generatorApps();
 
-
         if( 
             is_null($generatorApps->getCurrentApplication()) &&
             isset(\kernel::getInstance('Kernel')->getConfigurations('Applications')['main']['development']['addressUri']) &&
@@ -58,16 +57,12 @@ class Application
             \kernel::getInstance('Kernel')->getConfigurations('Applications');
 
             $generatorApps=$this->generatorApps();
-
         }
 
         if(is_null($generatorApps->getCurrentApplication()))
         { 
             throw new \Exception('Application:'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].' not found in Astronphp.json');
         }
-
-        
-        
 
         $this->nameApplication  = $generatorApps->getCurrentApplication()->nameApplication;
         $this->environment      = key($generatorApps->getCurrentApplication()->environmentApp);
@@ -103,8 +98,17 @@ class Application
         $this->addressUri = $app->addressUri;
         $this->addressFullUri = ($app->forceHttps==true?'https://':'http://').($app->forceWww==true?'www.':'').$app->addressUri;
 
+
+        \Performace::getInstance('Timer')->register('framework', microtime(true));
+        \Performace::getInstance('Timer')->register('appload', microtime(true));
+
         $app->instanceController(); 
 
+        if(class_exists('\Astronphp\Debugbar\View')){
+            $a = new \Astronphp\Debugbar\View();
+            $a->closeVars();
+            $a->showBar();
+        }
     }
 
     public function addressFullUri(){

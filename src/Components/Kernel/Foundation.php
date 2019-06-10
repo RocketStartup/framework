@@ -21,8 +21,8 @@ class Foundation{
                 \Kernel::getInstance([
                     'Kernel',
                     \Astronphp\Components\Kernel\Kernel::class
-                ]);                
-
+                ]);
+                
                 //Instance APP with configurations and controller
                 \App::getInstance([
                     'App',

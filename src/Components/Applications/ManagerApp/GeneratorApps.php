@@ -23,7 +23,6 @@ class GeneratorApps{
 		if(is_null($equals)){
 			$like=$this->getCurrentApplicationLike();
 		}
-
 		return $this->currentApplication;
 
 	}

@@ -27,6 +27,8 @@ class Kernel{
     protected $configurations = [];
     
     function __construct(){
+          $this->initTimer();
+
           $this->getConfigurations();
 
           $this->ErrorDefine();
@@ -46,6 +48,25 @@ class Kernel{
           return static::VERSION;
      }
      
+     public function initTimer(){
+          //Instance timer's system
+
+          $timer=\Performace::getInstance([
+               'Timer',
+               \Astronphp\Components\Performance\Timer::class
+          ]);
+          
+          //request server
+          $timer->register('systemload',$_SERVER['REQUEST_TIME_FLOAT']);
+
+          //request server
+          $timer->register('request',$_SERVER['REQUEST_TIME_FLOAT']);
+          $timer->register('request',START_ASTRONPHP);
+          
+          //request framework
+          $timer->register('framework', START_ASTRONPHP);
+
+     }
      public function getConfigurations($key=null)
      {    
           $Config = \Config::getInstance([

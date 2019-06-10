@@ -34,7 +34,7 @@ class Timer{
 			$time = microtime(true);
 		}
 		$this->log[$name][$key]['end'] = $time;
-		$this->log[$name][$key]['time'] = round($time-$this->log[$name][$key]['start'],5);
+		$this->log[$name][$key]['time'] = round(($time-$this->log[$name][$key]['start'])*1000,0);
 	}
 	
 	public function getOpen($name){

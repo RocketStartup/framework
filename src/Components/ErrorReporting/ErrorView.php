@@ -25,8 +25,7 @@ class ErrorView{
 			$this->environment = \App::getInstance('App')->environment;
 		} catch (\Exception $e) {
 			//$this->setExeption($e);
-		}		
-		
+		}
 		$this->showError='';
 			
 		$this->showError.='<html>';
@@ -92,7 +91,7 @@ class ErrorView{
 	
 	public function setError($v=''){
 		$this->hasError=true;
-		error_log(strip_tags($v), 0);
+		error_log(strip_tags($v)."\n---------------------------------------------------------------------------------------------------------------------------------------", 0);
 		$this->error = $v;
 		return $this;
 	}
