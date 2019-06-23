@@ -16,11 +16,11 @@ class SessionServer{
 		$this->SavePath(
 			(isset($objectCache['sessionSavePath'])?$objectCache['sessionSavePath']:'')
 		);
+		
 		$this->ChaceNavegation(
 			(isset($objectCache['cacheNavegation'])?$objectCache['cacheNavegation']: date('Y-m-d H:i:s'))
 		);
 		
-		session_start();
 		return $this;
 
 	}
@@ -46,9 +46,12 @@ class SessionServer{
 			$savePath='storage/framework/sessions/';
 		}
 		if(!file_exists(PATH_ROOT.$savePath)){
-			mkdir(PATH_ROOT.$savePath, 0777 , true);
+			mkdir(PATH_ROOT.$savePath, 777 , true);
 		}
+
 		session_save_path(PATH_ROOT.$savePath);
+		session_start();
+
 	}
 	
 	private function ChaceNavegation($date=''){
