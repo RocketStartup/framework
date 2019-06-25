@@ -18,7 +18,8 @@ class RequestLimiter{
 	public $maxRequestIp			=	30;
 	public $timeSecondsBanned		=	10;
 
-	public function Request($conf){
+	public function __construct($conf){
+
 		
 		$this->timeSeconds			=	(isset($conf['timeSeconds']) && !empty((int)$conf['timeSeconds'])? $conf['timeSeconds'] : $this->timeSeconds);
 		$this->maxRequestIp			=	(isset($conf['maxRequestIp']) && !empty((int)$conf['maxRequestIp'])? $conf['maxRequestIp'] : $this->maxRequestIp);

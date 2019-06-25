@@ -35,20 +35,23 @@ class Kernel{
 
           $this->SessionServer();
 
+          $this->RequestLimiter();
+
           $this->Http();
      }
 
      /**
-      * Get the version number of the framework.
-      *
-      * @return string
-      */
+     * Get the version number of the framework.
+     *
+     * @return string
+     */
      public function version()
      {
           return static::VERSION;
      }
      
-     public function initTimer(){
+     public function initTimer()
+     {
           //Instance timer's system
 
           $timer=\Performace::getInstance([
@@ -67,6 +70,7 @@ class Kernel{
           $timer->register('framework', START_ASTRONPHP);
 
      }
+     
      public function getConfigurations($key=null)
      {    
           $Config = \Config::getInstance([
@@ -81,6 +85,17 @@ class Kernel{
           }else{
                return $this->configurations[$key];
           }
+     }
+
+     public function RequestLimiter()
+     {    
+          \Http::getInstance(
+               [
+                   'RequestLimiter',
+                   \Astronphp\Components\Http\RequestLimiter::class
+               ],
+               (isset($this->configurations['Request'])?$this->configurations['Request']:array())
+           );
      }
 
      public function ErrorDefine()
@@ -131,5 +146,4 @@ class Kernel{
           }
           
      }
-     
 }

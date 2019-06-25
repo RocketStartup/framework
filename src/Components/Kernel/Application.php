@@ -23,7 +23,6 @@ class Application
         return $this; 
     }
 
-
     public function generatorApps(){
         $generatorApps = \Http::getInstance(
             [
@@ -67,8 +66,7 @@ class Application
         $this->nameApplication  = $generatorApps->getCurrentApplication()->nameApplication;
         $this->environment      = key($generatorApps->getCurrentApplication()->environmentApp);
         $this->version          = \Config::getInstance('ConfigFile')->Version;
-        
-
+               
         \Http::getInstance(
             [
                 'LocationBroker',
