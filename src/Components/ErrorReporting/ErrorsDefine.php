@@ -10,8 +10,8 @@ class ErrorsDefine{
 	
 	private $displayErrors			=	true;
 	private $logErrors				=	false;
-	private $errorLogFile			=	"/storage/log/error/php.log";
-	private $errorSqlFile			=	"/storage/log/error/sql.log";
+	private $errorLogFile			=	"/tmp/log/error/php.log";
+	private $errorSqlFile			=	"/tmp/log/error/sql.log";
 	private $errorReporting			=	0;
 
 	private $notifySlackKey 		=	"";
@@ -50,7 +50,7 @@ class ErrorsDefine{
 	
 	private function ErrorLogFile($filepath=''){
 		if(empty($filepath)){
-			$filepath=PATH_ROOT.'/Storage/Log/Error/php.log';
+			$filepath=PATH_ROOT.'/tmp/log/error/php.log';
 		}else{
 			$filepath=PATH_ROOT.$filepath;
 		}

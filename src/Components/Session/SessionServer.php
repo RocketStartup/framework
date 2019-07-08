@@ -42,11 +42,14 @@ class SessionServer{
 	}
 	
 	private function SavePath($savePath=''){
-		if(empty($savePath) || !is_dir(PATH_ROOT.$savePath)){
-			$savePath='storage/framework/sessions/';
-		}
+		
 		if(!file_exists(PATH_ROOT.$savePath)){
 			mkdir(PATH_ROOT.$savePath, 777 , true);
+		}
+		
+		if(!empty($savePath) && !is_dir(PATH_ROOT.$savePath)){
+			echo PATH_ROOT.$savePath; exit;
+			$savePath='storage/framework/sessions/';
 		}
 
 		session_save_path(PATH_ROOT.$savePath);

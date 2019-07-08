@@ -4,7 +4,7 @@ namespace Astronphp\Components\Routing;
 
 class Controllers{
 
-    private $controllerPath     =  PATH_ROOT.'apps/';
+    private $controllerPath     =  PATH_ROOT.'src/';
     private $controllerFile;
     private $uriApp;
     private $uriMapping;
@@ -12,7 +12,7 @@ class Controllers{
     private $nameController;
 
 	public function __construct(string $uriApp='', string $nameApp=''){
-        $this->controllerPath   .= $nameApp.'/controllers';
+        $this->controllerPath   .= 'controller/'.$nameApp;
         $this->uriApp            = $uriApp;
         
         $this->setUrlMapping();
@@ -98,10 +98,10 @@ class Controllers{
 
     public function instanceClass(){
         if(empty($this->controllerFile) || !file_exists($this->controllerFile) || !is_file($this->controllerFile)){
-            require_once $this->controllerFile;
             if(!class_exists($this->nameController)){
                 $this->defineError404();   
             }
+            require_once $this->controllerFile;
         }
 
         require_once $this->controllerFile;
