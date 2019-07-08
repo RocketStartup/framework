@@ -10,7 +10,7 @@ class Kernel{
      *
      * @var string
      */
-    const VERSION = '0.0.8';
+    const VERSION = '0.0.10';
     
     /**
      * The base path for installation.
@@ -30,6 +30,8 @@ class Kernel{
           $this->initTimer();
 
           $this->getConfigurations();
+
+          $this->Timezone();
 
           $this->ErrorDefine();
 
@@ -98,6 +100,20 @@ class Kernel{
            );
      }
 
+     public function Timezone()
+     {     
+          if(isset($this->configurations['Region']))
+          {
+               \Config::getInstance( 
+                    [
+                         'Timezone',
+                         \Astronphp\Components\Region\Timezone::class,
+                    ],
+                    $this->configurations['Region']
+               );
+          }
+     }
+     
      public function ErrorDefine()
      {     
           if(isset($this->configurations['ErrorsDefine']))
