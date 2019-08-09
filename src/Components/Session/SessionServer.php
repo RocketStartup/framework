@@ -44,7 +44,7 @@ class SessionServer{
 	private function SavePath($savePath=''){
 		
 		if(!file_exists(PATH_ROOT.$savePath)){
-			mkdir(PATH_ROOT.$savePath, 777 , true);
+			mkdir(PATH_ROOT.$savePath,2777,true);
 		}
 		
 		if(!empty($savePath) && !is_dir(PATH_ROOT.$savePath)){

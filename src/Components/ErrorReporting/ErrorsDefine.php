@@ -60,10 +60,10 @@ class ErrorsDefine{
 			array_pop($difLog);
 			$difLog = implode('/', $difLog).'/';
 			if(!file_exists($difLog) || $difLog==''){
-				mkdir($difLog, 0777 , true);
+				mkdir($difLog,2777, true);
 			}
 			$file = fopen($filepath,"w+") or die("Arquivo de log não pode ser aberto!");
-			chmod($filepath, 0777);
+			chmod($filepath,2777);
 			$txt = "Created: ".date('d-m-Y H:m:i')."\n";
 			fwrite($file, $txt);
 			fclose($file);

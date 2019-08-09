@@ -12,7 +12,7 @@ class Controllers{
     private $nameController;
 
 	public function __construct(string $uriApp='', string $nameApp=''){
-        $this->controllerPath   .= 'controller/'.$nameApp;
+        $this->controllerPath   .= 'Controller/'.$nameApp;
         $this->uriApp            = $uriApp;
         
         $this->setUrlMapping();
