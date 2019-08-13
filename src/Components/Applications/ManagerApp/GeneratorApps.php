@@ -29,22 +29,25 @@ class GeneratorApps{
 
 	private function getCurrentApplicationEquals(){
 		$this->currentApplication=null;
-		if(substr($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'], -1)=='/'){ $server_uri = substr($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'], 0,-1); }else{  $server_uri =  $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; }
+		if(substr($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'], -1)=='/'){ 
+			$server_uri = substr($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'], 0,-1); 
+		}else{  
+			$server_uri =  $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; 
+		}
 
 		foreach ($this->apps as $app) {
 			foreach ($app->environmentApp as $configApp) {
 				if(isset($configApp->addressUri)){
 					if(substr($configApp->addressUri, -1)=='/'){ $appUri = substr($configApp->addressUri, 0,-1); }else{ $appUri = $configApp->addressUri; $configApp->addressUri.='/';}
 
-					if(!empty($configApp->addressUri) && $server_uri==$appUri){
-						$configApp->active = true;
-						$app->active = true;
-						
-						$this->currentApplication = $app;
-						$this->currentApplication->environmentApp = array();
-						$this->currentApplication->environmentApp[$configApp->environment]=$configApp;
-									
-					}
+					if(!empty($configApp->addressUri) && ($server_uri==$appUri || $_SERVER['HTTP_HOST']==$appUri)){ 
+					        $configApp->active = true;                                                              
+					        $app->active = true;                                                                    
+					        $this->currentApplication = $app;                                                       
+					        $this->currentApplication->environmentApp = array();                                    
+					        $this->currentApplication->environmentApp[$configApp->environment]=$configApp;          
+					        break;                                                                                  
+					}                                                                                               
 				}
 			}
 		}
