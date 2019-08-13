@@ -11,7 +11,7 @@ class Controllers{
     private $uriMethod;
     private $nameController;
 
-	public function __construct(string $uriApp='', string $nameApp=''){
+    public function __construct(string $uriApp='', string $nameApp=''){
         $this->controllerPath   .= 'Controller/'.$nameApp;
         $this->uriApp            = $uriApp;
         
@@ -67,7 +67,7 @@ class Controllers{
 
                 next($urlArray);
                 if(isset($urlArray[key($urlArray)])){
-                    $this->setMethodsURI($urlArray[key($urlArray)]);
+                    $this->setMethodsURI($this->camelCase($urlArray[key($urlArray)]));
                 }
                 $loopDir = false;
             }
