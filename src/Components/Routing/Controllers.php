@@ -50,7 +50,7 @@ class Controllers{
             if( (file_exists($this->controllerFile) && in_array($currentArray, scandir($this->controllerFile))) ){
                
                 $this->controllerFile       .=  '/'. $currentArray;
-                
+
                 next($urlArray);
                 if(isset($urlArray[key($urlArray)])){
                     $this->setMethodsURI($urlArray[key($urlArray)]);
@@ -75,10 +75,11 @@ class Controllers{
              * If you do not have any folder or file, enter this option that looks for an index file, if it does not exist then call a controller for Error 404
              */
             else{
+                
                 if(isset($urlArray[key($urlArray)])){
-                    $this->setMethodsURI($urlArray[key($urlArray)]);
+                    $this->setMethodsURI($this->camelCase($urlArray[key($urlArray)]));
                 }
-
+                
                 if(file_exists($this->controllerFile.'/IndexController.php')){
                     $this->nameController        =  'IndexController';
                     $this->controllerFile       .=  '/'.$this->camelCase($this->nameController).'.php';
