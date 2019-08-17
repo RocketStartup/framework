@@ -5,7 +5,7 @@ use Astronphp\Components\Applications\ManagerApp\Applications;
 
 class GeneratorApps{
 	public $apps;
-	public $currentApplication;
+	public $currentApplication = null;
 
 	public function __construct($objectJson){
 		foreach ($objectJson as $nameApp => $environment) {
@@ -19,6 +19,9 @@ class GeneratorApps{
 	}
 
 	public function getCurrentApplication(){
+		if(!is_null($this->currentApplication)){
+			return $this->currentApplication;
+		};
 		$equals=$this->getCurrentApplicationEquals();
 		if(is_null($equals)){
 			$like=$this->getCurrentApplicationLike();
@@ -40,7 +43,7 @@ class GeneratorApps{
 				if(isset($configApp->addressUri)){
 					if(substr($configApp->addressUri, -1)=='/'){ $appUri = substr($configApp->addressUri, 0,-1); }else{ $appUri = $configApp->addressUri; $configApp->addressUri.='/';}
 
-					if(!empty($configApp->addressUri) && ($server_uri==$appUri || $_SERVER['HTTP_HOST']==$appUri)){ 
+					if(!empty($configApp->addressUri) && $server_uri==$appUri){ 
 					        $configApp->active = true;                                                              
 					        $app->active = true;                                                                    
 					        $this->currentApplication = $app;                                                       
@@ -63,11 +66,13 @@ class GeneratorApps{
 		foreach ($this->apps as $app) {
 			foreach ($app->environmentApp as $configApp) {
 				if(isset($configApp->addressUri)){
+
 					if(substr($configApp->addressUri, -1)=='/'){ $appUri = substr($configApp->addressUri, 0,-1); }else{ $appUri = $configApp->addressUri; $configApp->addressUri.='/';}
 					if(!empty($configApp->addressUri) && strpos($server_uri,$appUri)!==false){
 						$configApp->active = true;
 						$app->active = true;
-						
+
+						$this->currentApplication=null;
 						$this->currentApplication = $app;
 						$this->currentApplication->environmentApp = array();
 						$this->currentApplication->environmentApp[$configApp->environment]=$configApp;
@@ -78,7 +83,4 @@ class GeneratorApps{
 		}
 		return $this->currentApplication;
 	}
-
-
-
 }

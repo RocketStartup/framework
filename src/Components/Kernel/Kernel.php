@@ -10,7 +10,7 @@ class Kernel{
      *
      * @var string
      */
-    const VERSION = '0.0.16';
+    const VERSION = '0.0.17';
     
     /**
      * The base path for installation.
