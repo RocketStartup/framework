@@ -5,9 +5,12 @@ use Astronphp\Components\Applications\ManagerApp\Applications;
 
 class GeneratorApps{
 	public $apps;
-	public $currentApplication = null;
+	public $currentApplication 	= null;
+	public $serverUri 			= '';
 
 	public function __construct($objectJson){
+		$this->serverUri =  $this->removeLastBackslash($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+		
 		foreach ($objectJson as $nameApp => $environment) {
 			$this->apps[] = new Applications($nameApp, $environment);
 		}
@@ -32,25 +35,20 @@ class GeneratorApps{
 
 	private function getCurrentApplicationEquals(){
 		$this->currentApplication=null;
-		if(substr($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'], -1)=='/'){ 
-			$server_uri = substr($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'], 0,-1); 
-		}else{  
-			$server_uri =  $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; 
-		}
-
+		
 		foreach ($this->apps as $app) {
 			foreach ($app->environmentApp as $configApp) {
 				if(isset($configApp->addressUri)){
-					if(substr($configApp->addressUri, -1)=='/'){ $appUri = substr($configApp->addressUri, 0,-1); }else{ $appUri = $configApp->addressUri; $configApp->addressUri.='/';}
+					$appUri = $this->removeLastBackslash($configApp->addressUri);
 
-					if(!empty($configApp->addressUri) && $server_uri==$appUri){ 
-					        $configApp->active = true;                                                              
-					        $app->active = true;                                                                    
-					        $this->currentApplication = $app;                                                       
-					        $this->currentApplication->environmentApp = array();                                    
-					        $this->currentApplication->environmentApp[$configApp->environment]=$configApp;          
-					        break;                                                                                  
-					}                                                                                               
+					if(!empty($configApp->addressUri) && $this->serverUri==$appUri){ 
+					        $configApp->active = true;
+					        $app->active = true;
+					        $this->currentApplication = $app;
+					        $this->currentApplication->environmentApp = array();
+					        $this->currentApplication->environmentApp[$configApp->environment]=$configApp;
+					        break;
+					}
 				}
 			}
 		}
@@ -61,14 +59,12 @@ class GeneratorApps{
 
 	private function getCurrentApplicationLike(){
 		$this->currentApplication=null;
-		if(substr($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'], -1)=='/'){ $server_uri = substr($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'], 0,-1); }else{  $server_uri =  $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; }
-
+		$score=0;
 		foreach ($this->apps as $app) {
 			foreach ($app->environmentApp as $configApp) {
 				if(isset($configApp->addressUri)){
-
-					if(substr($configApp->addressUri, -1)=='/'){ $appUri = substr($configApp->addressUri, 0,-1); }else{ $appUri = $configApp->addressUri; $configApp->addressUri.='/';}
-					if(!empty($configApp->addressUri) && strpos($server_uri,$appUri)!==false){
+					$appUri = $this->removeLastBackslash($configApp->addressUri);
+					if(!empty($configApp->addressUri) && strpos($this->serverUri,$appUri)!==false && $score<strlen($appUri)){
 						$configApp->active = true;
 						$app->active = true;
 
@@ -76,11 +72,15 @@ class GeneratorApps{
 						$this->currentApplication = $app;
 						$this->currentApplication->environmentApp = array();
 						$this->currentApplication->environmentApp[$configApp->environment]=$configApp;
-									
+						$score = strlen($appUri);
 					}
 				}
 			}
 		}
 		return $this->currentApplication;
+	}
+
+	private function removeLastBackslash($v){
+		return (substr($v,-1)=='/'?substr($v, 0,-1):$v);
 	}
 }
