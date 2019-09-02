@@ -75,14 +75,15 @@ class Application
         )->AuthorizeLocation(
             $generatorApps->getCurrentApplication()->environmentApp
         );
-
+        
         $orm = \Orm::getInstance(
             [
                 'Orm',
                 \Astronphp\Components\DataBase\Orm::class
             ],
-            $generatorApps->getCurrentApplication()->environmentApp
+            $generatorApps->getCurrentApplication()
         );
+        $orm->doctrine();
 
         
         $app = \App::getInstance(
