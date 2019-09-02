@@ -13,7 +13,8 @@ class Orm{
 
   	public function __construct(\Astronphp\Components\Applications\ManagerApp\Applications $conf){
 		
-		$this->dirEntity	=	PATH_ROOT.'src/entity/'.$conf->nameApplication;
+		$this->dirEntity		=	PATH_ROOT.'src/entity/'.$conf->nameApplication;
+		$this->entityNamespace	=	ucfirst($conf->nameApplication);
 		if(!\file_exists($this->dirEntity)){
 			throw new \Exception("Create a folder for entity on ".$this->dirEntity);
 		}

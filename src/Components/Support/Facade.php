@@ -15,9 +15,11 @@ class Facade
     public static function getInstance($object=null,$parms=null)
     {   
         if(is_string($object)){
+            if($object=='Doctrine' && self::returnInstance($object)->connect()!=null){
+                return self::returnInstance($object)->connect();
+            }
             return self::returnInstance($object);
         }
-
         
         $object['key']      =  $object[0];
         $object['class']    =  (isset($object[1])?$object[1]:$object[0]);
