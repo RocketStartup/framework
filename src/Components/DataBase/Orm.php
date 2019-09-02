@@ -15,9 +15,6 @@ class Orm{
 		
 		$this->dirEntity		=	PATH_ROOT.'src/entity/'.$conf->nameApplication;
 		$this->entityNamespace	=	ucfirst($conf->nameApplication);
-		if(!\file_exists($this->dirEntity)){
-			throw new \Exception("Create a folder for entity on ".$this->dirEntity);
-		}
 		$conf = current($conf->environmentApp);
 		
 		$this->engine		=	$conf->dataBase->engine		??	'pdo_mysql';
@@ -30,15 +27,24 @@ class Orm{
 	}
 	
 	public function doctrine(){
-		if(class_exists(\Astronphp\Orm\ConnectDoctrine::class)){
-				return \Orm::getInstance(
-					[
-						'Doctrine',
-						\Astronphp\Orm\ConnectDoctrine::class
-					]
-				);
-		}else{
-			throw new \Exception("Use composer require astronphp/orm");
+		if(	!empty($this->host) &&
+			!empty($this->username) &&
+			!empty($this->password) &&
+			!empty($this->database)
+		){
+			if(!\file_exists($this->dirEntity)){
+				throw new \Exception("Create a folder for entity on ".$this->dirEntity);
+			}
+			if(class_exists(\Astronphp\Orm\ConnectDoctrine::class)){
+					return \Orm::getInstance(
+						[
+							'Doctrine',
+							\Astronphp\Orm\ConnectDoctrine::class
+						]
+					);
+			}else{
+				throw new \Exception("Use composer require astronphp/orm");
+			}
 		}
 	}
 }
