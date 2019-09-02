@@ -9,12 +9,14 @@ class Orm{
 	public $password;
 	public $database;
 	public $port;
+	public $charset;
 	public $isDevMode;
 
   	public function __construct(\Astronphp\Components\Applications\ManagerApp\Applications $conf){
 		
 		$this->dirEntity		=	PATH_ROOT.'src/entity/'.$conf->nameApplication;
 		$this->entityNamespace	=	ucfirst($conf->nameApplication);
+		
 		$conf = current($conf->environmentApp);
 		
 		$this->engine		=	$conf->dataBase->engine		??	'pdo_mysql';
@@ -23,6 +25,7 @@ class Orm{
 		$this->password		=	$conf->dataBase->password	??	null;
 		$this->database		=	$conf->dataBase->database	??	null;
 		$this->port			=	$conf->dataBase->port		??	'3306';
+		$this->charset		=	$conf->dataBase->charset 	??	'utf8';
 		$this->isDevMode	=	($conf->environment=='production'?false:true);
 	}
 	
