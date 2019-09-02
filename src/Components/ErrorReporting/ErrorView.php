@@ -37,8 +37,8 @@ class ErrorView{
 		$this->showError.='		body{     margin: 0px auto; background-color: #24292e; background-image: url(https://astronphp.github.io/assets/media/bg.svg); background-repeat: no-repeat; background-size: 100% auto;background-position: center 50% ,0 0,0 0; }';
 		$this->showError.='		.contents{ margin: 0px auto; padding: 5% 5% 1% 5%; max-width: 1280px;}';
 		$this->showError.='		a{ font-weight: 700; text-decoration: none; background: #ffffff; padding: 4px 7px; border-radius: 2px; color: #252f34;}';
-		$this->showError.='		table{ font-size: 10px;}';
-		$this->showError.='		table tr:nth-child(even) {background: #e7dff6} table tr:nth-child(odd) {background: #bd9cf7;}';
+		$this->showError.='		table { font-size: 12px;line-height: 19px; }';
+		$this->showError.='		table tr:nth-child(even) {background: #6f6f6f} table tr:nth-child(odd) {background: #464646;}';
 		$this->showError.='		code{ font-size: 11px; display: table; float: left; margin-top: 19px; width: 100%; word-break: break-all;}';
 		$this->showError.='		#code{ word-break: break-all; }';
 		$this->showError.='		.date{ float:right; }';
