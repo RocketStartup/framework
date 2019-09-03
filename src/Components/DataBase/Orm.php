@@ -14,7 +14,7 @@ class Orm{
 
   	public function __construct(\Astronphp\Components\Applications\ManagerApp\Applications $conf){
 		
-		$this->dirEntity		=	PATH_ROOT.'src/entity/'.$conf->nameApplication;
+		$this->dirEntity		=	PATH_ROOT.'src/Entity/'.ucfirst($conf->nameApplication);
 		$this->entityNamespace	=	ucfirst($conf->nameApplication);
 		
 		$conf = current($conf->environmentApp);
