@@ -19,6 +19,9 @@ class ErrorView{
 	}
 
 	public function showError(){
+		header("Access-Control-Allow-Origin:*");
+		header("Access-Control-Allow-Headers:Content-Type");
+		header('Content-type: text/html');
 
 		try {
 			$this->environment ='';

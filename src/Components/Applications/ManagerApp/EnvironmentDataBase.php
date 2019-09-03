@@ -8,8 +8,9 @@ class EnvironmentDataBase{
 	public $host;
 	public $username;
 	public $password;
-	public $database;
+	public $dbname;
 	public $port;
+	public $charset;
 
 	function __construct(array $conf){
 
@@ -17,8 +18,9 @@ class EnvironmentDataBase{
 		$this->host			=	$conf['host'] 			??		null;
 		$this->username		=	$conf['username'] 		??		null;
 		$this->password		=	$conf['password'] 		??		null;
-		$this->database		=	$conf['database'] 		??		null;
+		$this->dbname		=	$conf['dbname'] 		??		null;
 		$this->port			=	$conf['port'] 			??		null;
+		$this->charset		=	$conf['charset'] 		??		null;
 
 	}
 }

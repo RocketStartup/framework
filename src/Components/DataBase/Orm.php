@@ -7,7 +7,7 @@ class Orm{
 	public $host;
 	public $username;
 	public $password;
-	public $database;
+	public $dbname;
 	public $port;
 	public $charset;
 	public $isDevMode;
@@ -23,17 +23,27 @@ class Orm{
 		$this->host			=	$conf->dataBase->host		??	null;
 		$this->username		=	$conf->dataBase->username	??	null;
 		$this->password		=	$conf->dataBase->password	??	null;
-		$this->database		=	$conf->dataBase->database	??	null;
+		$this->dbname		=	$conf->dataBase->dbname		??	null;
 		$this->port			=	$conf->dataBase->port		??	'3306';
 		$this->charset		=	$conf->dataBase->charset 	??	'utf8';
 		$this->isDevMode	=	($conf->environment=='production'?false:true);
+
+		if(isset($conf->dataBase) && (
+				!isset($conf->dataBase->host) ||
+				!isset($conf->dataBase->username) ||
+				!isset($conf->dataBase->password) ||
+				!isset($conf->dataBase->dbname)
+			)
+		){
+			throw new \Exception("Invalid database information in astronphp.json. Is required [host,username,password,dbname]");
+		}
 	}
 	
 	public function doctrine(){
 		if(	!empty($this->host) &&
 			!empty($this->username) &&
 			!empty($this->password) &&
-			!empty($this->database)
+			!empty($this->dbname)
 		){
 			if(!\file_exists($this->dirEntity)){
 				throw new \Exception("Create a folder for entity on ".$this->dirEntity);
