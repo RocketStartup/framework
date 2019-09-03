@@ -28,7 +28,7 @@ class Orm{
 		$this->charset		=	$conf->dataBase->charset 	??	'utf8';
 		$this->isDevMode	=	($conf->environment=='production'?false:true);
 
-		if(isset($conf->dataBase) && (
+		if($conf->dataBase!=false && (
 				!isset($conf->dataBase->host) ||
 				!isset($conf->dataBase->username) ||
 				!isset($conf->dataBase->password) ||
