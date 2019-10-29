@@ -81,7 +81,11 @@ class ErrorView{
 		$this->showError.='	</body>';
 		$this->showError.='</html>';
 
-		echo $this->showError; exit;
+		if (strpos($_SERVER['HTTP_ACCEPT'], 'htm') === false) {
+			echo nl2br(strip_tags($this->getError())); exit;
+		}else{
+			echo $this->showError; exit;
+		}
 	
 	}
 	
