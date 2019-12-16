@@ -26,9 +26,11 @@ class GeneratorApps{
 			return $this->currentApplication;
 		};
 		$equals=$this->getCurrentApplicationEquals();
+		
 		if(is_null($equals)){
 			$like=$this->getCurrentApplicationLike();
 		}
+
 		return $this->currentApplication;
 
 	}
@@ -39,15 +41,26 @@ class GeneratorApps{
 		foreach ($this->apps as $app) {
 			foreach ($app->environmentApp as $configApp) {
 				if(isset($configApp->addressUri)){
-					$appUri = $this->removeLastBackslash($configApp->addressUri);
+					if(is_array($configApp->addressUri)){
+						$arrayUri = $configApp->addressUri;
+					}else{
+						$arrayUri=[];
+						$arrayUri[]= $configApp->addressUri;
+					}
 
-					if(!empty($configApp->addressUri) && $this->serverUri==$appUri){ 
-					        $configApp->active = true;
-					        $app->active = true;
-					        $this->currentApplication = $app;
-					        $this->currentApplication->environmentApp = array();
-					        $this->currentApplication->environmentApp[$configApp->environment]=$configApp;
-					        break;
+					foreach ($arrayUri as $uri) {
+						$appUri = $this->removeLastBackslash($uri);
+
+						if(!empty($uri) && $this->serverUri==$appUri){ 
+								$configApp->active = true;
+								$app->active = true;
+								$configApp->addressUri	=	$uri;
+								
+								$this->currentApplication = $app;
+								$this->currentApplication->environmentApp = array();
+								$this->currentApplication->environmentApp[$configApp->environment]=$configApp;
+								break;
+						}
 					}
 				}
 			}
@@ -58,21 +71,32 @@ class GeneratorApps{
 	}
 
 	private function getCurrentApplicationLike(){
+
 		$this->currentApplication=null;
 		$score=0;
 		foreach ($this->apps as $app) {
 			foreach ($app->environmentApp as $configApp) {
 				if(isset($configApp->addressUri)){
-					$appUri = $this->removeLastBackslash($configApp->addressUri);
-					if(!empty($configApp->addressUri) && strpos($this->serverUri,$appUri)!==false && $score<strlen($appUri)){
-						$configApp->active = true;
-						$app->active = true;
 
-						$this->currentApplication=null;
-						$this->currentApplication = $app;
-						$this->currentApplication->environmentApp = array();
-						$this->currentApplication->environmentApp[$configApp->environment]=$configApp;
-						$score = strlen($appUri);
+					if(is_array($configApp->addressUri)){
+						$arrayUri = $configApp->addressUri;
+					}else{
+						$arrayUri=[];
+						$arrayUri[]= $configApp->addressUri;
+					}
+					foreach ($arrayUri as $uri) {
+						
+						$appUri = $this->removeLastBackslash($uri);
+						if(!empty($uri) && strpos($this->serverUri,$appUri)!==false && $score<strlen($appUri)){
+							$configApp->active = true;
+							$app->active = true;
+							$configApp->addressUri	=	$uri;
+							$this->currentApplication=null;
+							$this->currentApplication = $app;
+							$this->currentApplication->environmentApp = array();
+							$this->currentApplication->environmentApp[$configApp->environment]=$configApp;
+							$score = strlen($appUri);
+						}
 					}
 				}
 			}
