@@ -4,6 +4,12 @@ namespace Astronphp\Components\Header\Location;
 
 class LocationBroker{
 
+	private $requestUri;
+	private $serverName;
+	private $serverHttp;
+
+	public function __construct(){}
+	
 	
 	public function AuthorizeLocation($objectApp){
 
@@ -32,7 +38,6 @@ class LocationBroker{
 	private function AuthorizeWww($objectApp){
 		if((preg_match('/^www/', $_SERVER['SERVER_NAME']) && $objectApp->forceWww==false) || (!preg_match('/^www/', $_SERVER['SERVER_NAME']) && $objectApp->forceWww==true) ){
            return ($objectApp->forceWww==true?'www.':'');
-           
         }
 	}
 }

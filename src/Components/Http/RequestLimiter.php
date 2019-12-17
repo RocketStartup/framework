@@ -3,14 +3,10 @@
 namespace Astronphp\Components\Http;
 
 use Exeption;
-use Astronphp\Components\Traits\Getters;
-use Astronphp\Components\Traits\Setters;
 use Astronphp\Components\Http\Response;
 
 
 class RequestLimiter{
-
-	use Getters,Setters;
 
 	public $ip						=	'';
 	public $amountAccess			=	0;

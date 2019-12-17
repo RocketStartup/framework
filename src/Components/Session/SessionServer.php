@@ -5,7 +5,7 @@ namespace Astronphp\Components\Session;
 class SessionServer{
 
 	
-	public function __construct($objectCache=false){
+	public function __construct(array $objectCache){
 
 		$this->CacheLimiter(
 			(isset($objectCache['sessionCacheLimiter'])?$objectCache['sessionCacheLimiter']:'')
@@ -48,7 +48,6 @@ class SessionServer{
 		}
 		
 		if(!empty($savePath) && !is_dir(PATH_ROOT.$savePath)){
-			echo PATH_ROOT.$savePath; exit;
 			$savePath='storage/framework/sessions/';
 		}
 
