@@ -18,15 +18,19 @@ class LocationBroker{
 	}
 
 	private function AuthorizeHttps($objectApp){
-		if(	
-			(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && $objectApp->forceHttps==false) ||
-			($objectApp->forceHttps==true && (!isset($_SERVER['HTTPS']) || (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'off')))
+		if(
+			(
+				$objectApp->forceHttps == true &&
+				(!isset($_SERVER['HTTPS']) && !isset($_SERVER['HTTP_X_FORWARDED_PROTO'])) ||
+				(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'off') ||
+				(isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO']!="https")
+			) ||
+			(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && $objectApp->forceHttps == false)
 		){
-			return ($objectApp->forceHttps==false?'http://':'https://');
+			return ($objectApp->forceHttps == false ? 'http://' : 'https://');
 		}else{
-			return '';
+				return '';
 		}
-
 	}
 
 	private function AuthorizeWww($objectApp){
