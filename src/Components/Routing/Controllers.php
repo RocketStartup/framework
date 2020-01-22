@@ -21,7 +21,7 @@ class Controllers{
     }
     
     private function setUrlMapping(){
-        $this->uriMapping = str_replace($this->uriApp ,'', $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+        $this->uriMapping = str_replace($this->uriApp ,'', $_SERVER['HTTP_HOST'].explode('?',$_SERVER['REQUEST_URI'])[0]);
     }
 
     private function getArrayUri(){
@@ -109,9 +109,13 @@ class Controllers{
 
         $controller = new $this->nameController();
         $method = $this->uriMethod;
-        
         if(method_exists($controller,$method) && (new \ReflectionMethod($controller, $method))->isPublic() ){
             $controller->$method();
+        }else if(!empty($method) && file_exists($this->controllerPath.'/errors/Error404Controller.php')){
+            $this->defineError404();
+            require_once $this->controllerFile;
+            $controller = new $this->nameController();
+            $controller->show();
         }else if(method_exists($controller, 'show') && (new \ReflectionMethod($controller, 'show'))->isPublic()){
             $controller->show();
         }
