@@ -8,7 +8,7 @@ class Foundation{
         public function __construct()
         {   
             ob_start();
-            define('PATH_ROOT', explode('vendor/astronphp', __DIR__)[0]);
+            define('PATH_ROOT', explode('vendor' . DIRECTORY_SEPARATOR . 'astronphp', __DIR__)[0]);
 
             $this->defineAlias();
             
